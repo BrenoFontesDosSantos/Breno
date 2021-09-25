@@ -1,0 +1,498 @@
+#include <iostream>
+#include <string.h>
+#include <conio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+typedef struct carro
+
+{
+
+ int cod;
+ 
+ char marca [20];
+
+ char modelo [20];
+
+ int ano;
+
+ char placa[10];
+
+}carro;
+
+carro car[10];
+
+void menu();
+
+void inicializar();
+
+void imprimir();
+
+void cadastrar();
+
+int main(int argc, char** argv) {
+
+setlocale(LC_ALL," ");
+
+
+int i;
+
+int opcao;
+
+int ano;
+
+int z;
+
+char modelo[20];
+
+z=0;
+
+ano=0;
+
+i=0;
+
+car[i].cod = 0;       
+
+car[i].ano = 0;
+
+car[z].cod = 0;
+
+         
+
+strcpy(car[i].marca,"");
+
+strcpy(car[i].modelo,"");
+
+strcpy(car[i].placa,"");
+
+ 
+
+do
+
+{
+
+  printf("**********LOCADORA DE CARROS FONTES********* \n");
+
+  printf("|----------------------------------------- |\n");
+
+  printf("|********* MENU *********       |\n");
+
+  printf("|------------------------------------------|\n");
+
+  printf("|1 - CADASTRA CARROS                   |\n");
+
+  printf("|2 - LISTAR CARROS                      |\n");
+
+  printf("|3 - PESQUISAR CARROS                   |\n"); 
+
+  printf("|4 - MOSTRA CARROS A PARTIR DE UM ANO   |\n");
+
+  printf("|5 - SAIR                                 |\n");
+
+  printf("|---------------------------------------- |\n");
+
+ 
+
+  
+
+  
+
+     printf("\n\n INFORME SUA ESCOLHA: ");
+
+     scanf("%d",&opcao);
+
+ 
+
+     switch(opcao)
+
+   
+
+  {
+
+     case 1:
+
+ if (car[i].cod<=0)
+
+ 
+
+    {
+
+ 
+
+car[i].cod=0;
+
+FILE *cadastro;
+
+ 
+
+  char marca [20], modelo[20], placa[10],status;
+
+  car[i].ano;
+
+  
+
+  cadastro = fopen ("CADASTRO.txt", "a+");
+
+   if(!cadastro)
+
+   {
+
+   printf( "Erro na abertura do arquivo");
+
+   exit(0);
+
+   }
+
+ 
+
+  puts ("Entre com a Marca: ");
+
+  scanf("%s",&car[i].marca);
+
+  fprintf (cadastro, "Marca: %s \n",car[i].marca);
+
+  puts ("Entre com o Modelo: ");
+
+  scanf("%s",&car[i].modelo);
+
+  fprintf (cadastro, "Modelo: %s \n",car[i].modelo);
+
+  puts ("Entre com a Placa: ");
+
+  scanf("%s",&car[i].placa);
+
+  fprintf (cadastro, "Placa: %s \n",car[i].placa);
+
+  printf ("Entre com a Ano: \n ");
+
+  scanf("%d",&car[i].ano);
+
+  fprintf (cadastro, "Ano: %d \n",car[i].ano);
+
+  fprintf (cadastro, "\n",car[i].ano);
+
+  printf ("Cadastro realizado com sucesso! \n");
+
+i=i+1;
+
+fclose (cadastro);
+
+ 
+
+ 
+
+}
+
+ else
+
+ {
+
+ 
+
+ printf("\n Limite de cadastro: 10");
+
+ 
+
+ }
+
+                                                         
+
+ break;
+
+ 
+
+ 
+
+ case 2:
+
+ for(i=0;i<10;i++)
+
+ {
+
+ 
+
+ printf("\n O ano do carro: %d",car[i].ano);
+
+ printf("\n A marca do carro: %s",car[i].marca);
+
+ printf("\n O modelo do carro: %s",car[i].modelo);
+
+ printf("\n A placa do carro: %s",car[i].placa);
+
+ printf("\n\n =================================== \n \n");
+
+ 
+
+ 
+
+ }
+
+ 
+
+ 
+
+                                                                           
+
+ break;
+
+                                                                          
+
+case 3:
+
+ 
+
+printf("\n INSIRA O MODELO A SER PESQUISADO:");
+
+ 
+
+scanf("%s",&modelo);
+
+ 
+
+for (i=0; i<10; i++)
+
+ 
+
+{
+
+ 
+
+if (strcmp(car[i].modelo,strlwr(modelo)) == 0)
+
+ 
+
+{
+
+printf("\n O ano do carro: %d",car[i].ano);
+
+printf("\n A marca do carro: %s",car[i].marca);
+
+printf("\n O modelo do carro: %s",car[i].modelo);
+
+printf("\n A placa do carro: %s",car[i].placa);
+
+ 
+
+printf("\n\n =================================== \n \n");
+
+ 
+
+i++;
+
+ 
+
+}
+
+ 
+
+}
+
+ 
+
+if (i==0)
+
+ 
+
+{
+
+ 
+
+printf("\n ERRO AO ENCONTRADO O MODELO %s \n\n",modelo);
+
+ 
+
+}
+
+ 
+
+else
+
+ 
+
+{
+
+ 
+
+i=0;
+
+ 
+
+}
+
+ 
+
+break;
+
+ 
+
+case 4:
+
+ 
+
+printf("\n  INSIRA O ANO A SER PESQUISADO:");
+
+scanf("%d",&ano);
+
+ 
+
+for (i=0; i<10; i++)
+
+ 
+
+{
+
+ 
+
+if (car[i].ano >= ano)
+
+ 
+
+{
+
+ 
+
+printf("\n O ano do carro: %d",car[i].ano);
+
+ 
+
+printf("\n A marca do carro: %s",car[i].marca);
+
+ 
+
+printf("\n O modelo do carro: %s",car[i].modelo);
+
+ 
+
+printf("\n A placa do carro: %s",car[i].placa);
+
+ 
+
+printf("\n\n =================================== \n \n");
+
+ 
+
+z++;
+
+ 
+
+}
+
+ 
+
+}
+
+ 
+
+if (z==0)
+
+ 
+
+{
+
+ 
+
+printf("\n ERRO AO ENCONTRAR VEÍCULOS ACIMA DE %d \n\n",ano);
+
+ 
+
+}
+
+ 
+
+else
+
+ 
+
+{
+
+ 
+
+z=0;
+
+ 
+
+}
+
+ 
+
+break;
+
+ 
+
+case 5:
+
+ 
+
+ printf("\n Obrigado por utilizar nosso programa! até breve, aperte 0 para encerrar o programa");
+
+ return (0);                                                                                           
+
+break;
+
+ 
+
+default:
+
+ 
+
+printf("\n ESCOLHA NÃO CADASTRADA, SELECIONE UMA DAS OPÇÕES ABAIXO. \n \n ");
+
+ 
+
+break;
+
+ 
+
+}
+
+ 
+
+}
+
+while (opcao!=5 && i<=10);
+
+ 
+
+if (i==10)
+
+ 
+
+{
+
+ 
+
+printf("\n \n LIMITE DE CARROS ALCANÇADO! \n \n \n");
+
+ 
+
+}
+
+ 
+
+for (z=0; z;);
+ 
+
+{
+
+printf("\n O ano do carro: %d",car[z].ano);
+
+printf("\n A marca do carro: %s",car[z].marca);
+
+printf("\n O modelo do carro: %s",car[z].modelo);
+
+printf("\n A placa do carro: %s",car[z].placa);
+
+ 
+
+printf("\n\n =================================== \n \n");
+
+ 
+
+}
+
+ 
+
+return (0);
+
+}
